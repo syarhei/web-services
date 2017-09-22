@@ -23,7 +23,7 @@ namespace ws_lab_01.App_Code {
 
             if (int.TryParse(req.Params["result"], out number)) {
                 try {
-                    Result.result += number;
+                    Result.result = number;
                     int top = Result.stack.Peek();
                     res.Write(js.Serialize(new { result = Result.result + top, stack = Result.stack }));
                 } catch (InvalidOperationException) {
