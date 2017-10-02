@@ -14,12 +14,11 @@ namespace ws_lab_02.Controllers
         // GET: api/Result
         public object Get()
         {
-            try {
-                int top = Result.stack.Peek();
+            int top;
+            if (Result.stack.TryPeek(out top))
                 return new { result = Result.result + top, stack = Result.stack };
-            } catch (InvalidOperationException) {
+            else
                 return new { result = Result.result, stack = "Stack is empty" };
-            }
         }
 
         // POST: api/Result
@@ -28,47 +27,39 @@ namespace ws_lab_02.Controllers
         {
             int number;
             if (int.TryParse(result, out number)) {
-                try {
-                    Result.result = number;
-                    int top = Result.stack.Peek();
+                Result.result = number;
+                int top;
+                if (Result.stack.TryPeek(out top))
                     return new { result = Result.result + top, stack = Result.stack };
-                } catch (InvalidOperationException) {
+                else
                     return new { result = Result.result, stack = "Stack is empty" };
-                }
-            } else {
-                return new { error = new { message = "Type of Params['rusult'] is not Integer", result = result } };
-            }
+            } else
+                return new { error = new { message = "Type of Params is not Integer", result = result } };
         }
 
         // PUT: api/Result
         [HttpPut]
-        public object Put([FromBody] string add)
-        {
+        public object Put([FromBody] string add) {
             int number;
             if (int.TryParse(add, out number)) {
                 Result.stack.Push(number);
-                try {
-                    int top = Result.stack.Peek();
+                int top;
+                if (Result.stack.TryPeek(out top))
                     return new { result = Result.result + top, stack = Result.stack };
-                } catch (InvalidOperationException) {
+                else
                     return new { result = Result.result, stack = "Stack is empty" };
-                }
-            } else {
-                return new { error = new { message = "Type of Params['add'] is not Integer", result = add } };
-            }
+            } else
+                return new { error = new { message = "Type of Params is not Integer", result = add } };
         }
 
         // DELETE: api/Result/5
         [HttpDelete]
-        public object Delete()
-        {
-            try {
-                Result.stack.Pop();
-                int top = Result.stack.Peek();
+        public object Delete() {
+            int top;
+            if (Result.stack.TryPop(out top) && Result.stack.TryPeek(out top))
                 return new { result = Result.result + top, stack = Result.stack };
-            } catch (InvalidOperationException) {
+            else
                 return new { result = Result.result, stack = "Stack is empty" };
-            }
         }
     }
 }

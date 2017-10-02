@@ -1,0 +1,87 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>Start Page</title>
+	<meta charset="utf-8" />
+    <script src="../Scripts/jquery-3.2.1.js"></script>
+    <script src="../Scripts/jquery-3.2.1.min.js"></script>
+</head>
+<body>
+    <div>
+
+        <input type="text" id="text-result" />
+
+        <input type="button" id="button-get" onclick="getResult()" value="GET" />
+        <input type="button" id="button-post" onclick="postResult()" value="POST" />
+        <input type="button" id="button-put" onclick="putResult()" value="PUT" />
+        <input type="button" id="button-delete" onclick="deleteResult()" value="DELETE" />
+
+        <p id="result-field"></p>
+
+    </div>
+
+    <script>
+        function getResult() {
+            $.ajax({
+                url: "http://localhost:59920/api/Result",
+                type: "GET",
+                success: result => {
+                    $("#result-field").html(JSON.stringify(result));
+                },
+                error: (error) => {
+                    console.log(error);
+                }
+            })
+        }
+
+        function postResult() {
+            $.ajax({
+                url: "http://localhost:59920/api/Result",
+                type: "POST",
+                data: $("#text-result").val(),
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                success: result => {
+                    $("#result-field").html(JSON.stringify(result));
+                },
+                error: (error) => {
+                    console.log(error);
+                }
+            })
+        }
+
+        function putResult() {
+            $.ajax({
+                url: "http://localhost:59920/api/Result",
+                type: "PUT",
+                data: $("#text-result").val(),
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                success: result => {
+                    $("#result-field").html(JSON.stringify(result));
+                },
+                error: (error) => {
+                    console.log(error);
+                }
+            })
+        }
+
+        function deleteResult() {
+            $.ajax({
+                url: "http://localhost:59920/api/Result",
+                type: "DELETE",
+                success: result => {
+                    $("#result-field").html(JSON.stringify(result));
+                },
+                error: (error) => {
+                    console.log(error);
+                }
+            })
+        }
+    </script>
+
+</body>
+</html>
