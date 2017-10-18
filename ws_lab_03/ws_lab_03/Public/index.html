@@ -1,0 +1,103 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>index</title>
+	<meta charset="utf-8" />
+    <script src="../Scripts/jquery-3.2.1.js"></script>
+</head>
+
+<body>
+
+    <table style="border: 1px solid black">
+
+        <tr>
+            <td>id</td>
+            <td><input type="text" id="id" /></td>
+        </tr>
+
+        <tr>
+            <td>sort</td>
+            <td><input type="text" id="sort" /></td>
+        </tr>
+
+        <tr>
+            <td>offset</td>
+            <td><input type="text" id="offset" /></td>
+        </tr>
+
+        <tr>
+            <td>limit</td>
+            <td><input type="text" id="limit" /></td>
+        </tr>
+
+        <tr>
+            <td>minid</td>
+            <td><input type="text" id="minid" /></td>
+        </tr>
+
+        <tr>
+            <td>maxid</td>
+            <td><input type="text" id="maxid" /></td>
+        </tr>
+
+        <tr>
+            <td>global_like</td>
+            <td><input type="text" id="global_like" /></td>
+        </tr>
+        
+    </table>
+
+    <div>
+        <input style="margin: 5px" type="button" onclick="getStudents()" value="getStudets" />
+    </div>
+    
+    <div style="margin: 5px 5px">
+        <textarea style="width: 400px; height: 200px;" id="ans"></textarea>
+    </div>
+
+    <table id="tbl">
+        
+    </table>
+
+    <script>
+
+        function getStudents() {
+            let data = {};
+            if ($("#sort").val() != "") data["sort"] = $("#sort").val();
+            if ($("#offset").val() != "") data["offset"] = $("#offset").val();
+            if ($("#limit").val() != "") data["limit"] = $("#limit").val();
+            if ($("#minid").val() != "") data["minid"] = $("#minid").val();
+            if ($("#maxid").val() != "") data["maxid"] = $("#maxid").val();
+            console.log(data);
+            $.ajax({
+                url: "http://localhost:65191/api/Students",
+                data: data,
+                type: "GET",
+                success: result => {
+                    console.log(result);
+                    $("#ans").html(result);
+                },
+                error: (error) => {
+                    console.log(error);
+                }
+            })
+        }
+
+        function getResultById() {
+            $.ajax({
+                url: "http://localhost:59920/api/Students/" + $("#id").val,
+                data: { sort: $("#ans") },
+                type: "GET",
+                success: result => {
+                    $("#ans").html(JSON.stringify(result));
+                },
+                error: (error) => {
+                    console.log(error);
+                }
+            })
+        }
+
+    </script>
+</body>
+</html>
