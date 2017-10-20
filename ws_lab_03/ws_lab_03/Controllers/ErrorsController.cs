@@ -15,11 +15,11 @@ namespace ws_lab_03.Controllers
         {
             switch (id) {
                 case 400:
-                    return new { id = 400, message = "Bad request" };
+                    return Ok(new { id = 400, message = "Bad request" });
                 case 404:
-                    return new { id = 404, message = "Student is not found" };
+                    return Ok(new { id = 404, message = "Student is not found" });
                 default:
-                    return new { id = 500, message = "Server error" };
+                    return Ok(new { id = 500, message = "Server error" });
             }
         }
     }

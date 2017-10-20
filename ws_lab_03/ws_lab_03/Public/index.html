@@ -9,7 +9,7 @@
 
 <body>
 
-    <table style="border: 1px solid black">
+    <table style="border: 1px solid black; padding: 5px; margin: 5px;">
 
         <tr>
             <td>id</td>
@@ -48,19 +48,54 @@
         
     </table>
 
-    <div>
+    <div style="padding: 5px; margin: 5px">
         <input style="margin: 5px" type="button" onclick="getStudents()" value="getStudets" />
-    </div>
-    
-    <div style="margin: 5px 5px">
-        <textarea style="width: 400px; height: 200px;" id="ans"></textarea>
+        <input style="margin: 5px" type="button" onclick="getStudentById()" value="getStudetsById" />
     </div>
 
-    <table id="tbl">
-        
-    </table>
+    <div>
+        <table style="border: 1px solid red; padding: 5px; margin: 5px;">
+            <tr>
+                <td>name</td>
+                <td><input type="text" id="name-post" /></td>
+            </tr>
+            <tr>
+                <td>phone</td>
+                <td><input type="text" id="phone-post" /></td>
+            </tr>
+        </table>
+        <div style="padding: 5px; margin: 5px;">
+            <input type="button" onclick="createStudent()" value="add student" />
+        </div>
+    </div>
+
+    <table id="tbl" style="border: 1px solid black"></table>
+
+    <div id="ans"></div>
 
     <script>
+
+        getStudents();
+
+        function createStudent() {
+            let data = {
+                name: $("#name-post").val(),
+                phone: $("#phone-post").val()
+            }
+            $.ajax({
+                url: "http://localhost:65191/api/Students",
+                data: data,
+                type: "POST",
+                success: result => {
+                    let html = "<div><b>successfully</b></div><div><a href = " + result.hateoas.href + ">new link</a></div>";
+                    $("#ans").html(html);
+                    getStudents();
+                },
+                error: (error) => {
+                    console.log(error);
+                }
+            })
+        }
 
         function getStudents() {
             let data = {};
@@ -69,14 +104,86 @@
             if ($("#limit").val() != "") data["limit"] = $("#limit").val();
             if ($("#minid").val() != "") data["minid"] = $("#minid").val();
             if ($("#maxid").val() != "") data["maxid"] = $("#maxid").val();
-            console.log(data);
+            if ($("#global_like").val() != "") data["global_like"] = $("#global_like").val();
             $.ajax({
                 url: "http://localhost:65191/api/Students",
                 data: data,
+                type: "GET", 
+                success: result => {
+                    let html = "";
+                    result.forEach(r => {
+                        html +=
+                            "<tr>" +
+                            "<td>" + r.id + "</td>" +
+                            "<td><input type='text' id='name" + r.id + "' value='" + r.name + "' /></td>" +
+                            "<td><input type='text' id='phone" + r.id + "' value='" + r.phone + "' /></td>" +
+                            "<td style='color: green'>" + r.hateoas.rel + "</td>" +
+                            "<td><a href = '" + r.hateoas.href + "'>get<a/></td>" +
+                            "<td><button onclick = 'updateStudent(`" + r.id.toString() + "`)'>update</button></td>" +
+                            "<td><button onclick = 'deleteStudent(`" + r.hateoas.href.toString() + "`)'>delete</button></td>" +
+                            "</tr>";
+                    })
+                    $("#tbl").html(html);
+                },
+                error: (error) => {
+                    console.log(error);
+                }
+            })
+        }
+
+        function getStudentById() {
+            let id = $("#id").val();
+            let link = "http://localhost:65191/api/Students/".concat(id);
+            $.ajax({
+                url: link,
                 type: "GET",
                 success: result => {
-                    console.log(result);
-                    $("#ans").html(result);
+                    let html = "<div><b>successfully</b></div><div><a href = " + result.hateoas.href + ">link</a></div>";
+                    $("#ans").html(html);
+                    getStudents();
+                },
+                error: (error) => {
+                    if (error.status === 404) {
+                        let result = error.responseJSON;
+                        let html = "<div><b>not found</b></div><div><a href ='" + result.href + "'>" + result.rel + "</a></div>";
+                        $("#ans").html(html);
+                        getStudents();
+                    }
+                }
+            })
+        }
+
+        function updateStudent(id) {
+            let studName = $("#name".concat(id)).val();
+            let studPhone = $("#phone".concat(id)).val();
+            let link = "http://localhost:65191/api/Students/".concat(id);
+            let data = {
+                "name": studName,
+                "phone": studPhone
+            }
+            $.ajax({
+                url: link,
+                data: data,
+                type: "PUT",
+                success: result => {
+                    let html = "<div><b>successfully</b></div><div><a href = " + result.hateoas.href + ">new link</a></div>";
+                    $("#ans").html(html);
+                    getStudents();
+                },
+                error: (error) => {
+                    console.log(error);
+                }
+            })
+        }
+
+        function deleteStudent(link) {
+            $.ajax({
+                url: link,
+                type: "DELETE",
+                success: result => {
+                    let html = "<div><b>successfully</b></div><div><a href = " + link + ">old link</a></div>";
+                    $("#ans").html(html);
+                    getStudents();
                 },
                 error: (error) => {
                     console.log(error);
