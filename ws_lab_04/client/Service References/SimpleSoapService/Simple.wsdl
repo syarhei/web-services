@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://msu/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://msu/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Simple web service</wsdl:documentation>
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://msu/">
+      <s:element name="sum_1">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="x" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="y" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="sum_1Response">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="sum_1Result" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="sum_2">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="s" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="d" type="s:double" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="sum_2Response">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sum_2Result" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="sum_3">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="msu1" type="tns:MSU" />
+            <s:element minOccurs="0" maxOccurs="1" name="msu2" type="tns:MSU" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="MSU">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="s" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="k" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="f" type="s:float" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="sum_3Response">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sum_3Result" type="tns:MSU" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="sum_1SoapIn">
+    <wsdl:part name="parameters" element="tns:sum_1" />
+  </wsdl:message>
+  <wsdl:message name="sum_1SoapOut">
+    <wsdl:part name="parameters" element="tns:sum_1Response" />
+  </wsdl:message>
+  <wsdl:message name="sum_2SoapIn">
+    <wsdl:part name="parameters" element="tns:sum_2" />
+  </wsdl:message>
+  <wsdl:message name="sum_2SoapOut">
+    <wsdl:part name="parameters" element="tns:sum_2Response" />
+  </wsdl:message>
+  <wsdl:message name="sum_3SoapIn">
+    <wsdl:part name="parameters" element="tns:sum_3" />
+  </wsdl:message>
+  <wsdl:message name="sum_3SoapOut">
+    <wsdl:part name="parameters" element="tns:sum_3Response" />
+  </wsdl:message>
+  <wsdl:portType name="SimpleSoap">
+    <wsdl:operation name="Add">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Sum of 2 int</wsdl:documentation>
+      <wsdl:input name="sum_1" message="tns:sum_1SoapIn" />
+      <wsdl:output name="sum_1" message="tns:sum_1SoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Concat">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Concatination of string and double</wsdl:documentation>
+      <wsdl:input name="sum_2" message="tns:sum_2SoapIn" />
+      <wsdl:output name="sum_2" message="tns:sum_2SoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Sum">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Sum of fileds of two [MSU] objects. Return [MSU] object</wsdl:documentation>
+      <wsdl:input name="sum_3" message="tns:sum_3SoapIn" />
+      <wsdl:output name="sum_3" message="tns:sum_3SoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="SimpleSoap" type="tns:SimpleSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="Add">
+      <soap:operation soapAction="http://msu/sum_1" style="document" />
+      <wsdl:input name="sum_1">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="sum_1">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Concat">
+      <soap:operation soapAction="http://msu/sum_2" style="document" />
+      <wsdl:input name="sum_2">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="sum_2">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Sum">
+      <soap:operation soapAction="http://msu/sum_3" style="document" />
+      <wsdl:input name="sum_3">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="sum_3">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="SimpleSoap12" type="tns:SimpleSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="Add">
+      <soap12:operation soapAction="http://msu/sum_1" style="document" />
+      <wsdl:input name="sum_1">
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="sum_1">
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Concat">
+      <soap12:operation soapAction="http://msu/sum_2" style="document" />
+      <wsdl:input name="sum_2">
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="sum_2">
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Sum">
+      <soap12:operation soapAction="http://msu/sum_3" style="document" />
+      <wsdl:input name="sum_3">
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="sum_3">
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="Simple">
+    <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Simple web service</wsdl:documentation>
+    <wsdl:port name="SimpleSoap" binding="tns:SimpleSoap">
+      <soap:address location="http://localhost:53938/Code/Simple.asmx" />
+    </wsdl:port>
+    <wsdl:port name="SimpleSoap12" binding="tns:SimpleSoap12">
+      <soap12:address location="http://localhost:53938/Code/Simple.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
