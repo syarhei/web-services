@@ -69,8 +69,7 @@ namespace ws_lab_03.Controllers
             //        if (val == "name") name = true;
             //        if (val == "phone") phone = true;
             //    }
-                
-
+                    
             //    list.ForEach(s => listApi_.Add(new {  });
             //}
             

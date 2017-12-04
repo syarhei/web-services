@@ -87,7 +87,7 @@
                 data: data,
                 type: "POST",
                 success: result => {
-                    let html = "<div><b>successfully</b></div><div><a href = " + result.hateoas.href + ">new link</a></div>";
+                    let html = "<div><b>successfully</b></div><div><a href = " + result.hateoas.href + ">new created link</a></div>";
                     $("#ans").html(html);
                     getStudents();
                 },
@@ -138,7 +138,7 @@
                 url: link,
                 type: "GET",
                 success: result => {
-                    let html = "<div><b>successfully</b></div><div><a href = " + result.hateoas.href + ">link</a></div>";
+                    let html = "<div><b>successfully</b></div><div><a href = " + result.hateoas.href + ">current link</a></div>";
                     $("#ans").html(html);
                     getStudents();
                 },
@@ -166,7 +166,7 @@
                 data: data,
                 type: "PUT",
                 success: result => {
-                    let html = "<div><b>successfully</b></div><div><a href = " + result.hateoas.href + ">new link</a></div>";
+                    let html = "<div><b>successfully</b></div><div><a href = " + result.hateoas.href + ">new updated link</a></div>";
                     $("#ans").html(html);
                     getStudents();
                 },
@@ -181,7 +181,7 @@
                 url: link,
                 type: "DELETE",
                 success: result => {
-                    let html = "<div><b>successfully</b></div><div><a href = " + link + ">old link</a></div>";
+                    let html = "<div><b>successfully</b></div><div><a href = " + link + ">deleted link</a></div>";
                     $("#ans").html(html);
                     getStudents();
                 },
