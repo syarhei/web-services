@@ -7,15 +7,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using testing.Code.Models;
 
 namespace client {
     public partial class StartPage : Form {
-        SimpleSoapService.SimpleSoapClient refClient;
+        SOAPWS.SimpleSoapClient refClient;
         Simple proxyClient;
 
         public StartPage() {
             InitializeComponent();
-            refClient = new SimpleSoapService.SimpleSoapClient();
+            refClient = new SOAPWS.SimpleSoapClient();
             proxyClient = new Simple();
         }
 
@@ -39,6 +40,24 @@ namespace client {
                 result.ForeColor = Color.Red;
                 result.Text = "Error!";
             }
+        }
+
+        private void MSU_Click(object sender, EventArgs e) {
+            MSU msu1 = new MSU();
+            msu1.s = s1.Text;
+            msu1.k = int.Parse(i1.Text);
+            msu1.f = float.Parse(d1.Text);
+
+            MSU msu2 = new MSU();
+            msu2.s = s2.Text;
+            msu2.k = int.Parse(i2.Text);
+            msu2.f = float.Parse(d2.Text);
+
+            MSU result = proxyClient.Sum(msu1, msu2);
+
+            result_1.Text = result.s;
+            result_2.Text = result.k.ToString();
+            result_3.Text = result.f.ToString();
         }
     }
 }

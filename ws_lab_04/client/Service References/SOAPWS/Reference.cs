@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace client.SimpleSoapService {
+namespace client.SOAPWS {
     using System.Runtime.Serialization;
     using System;
     
@@ -89,29 +89,36 @@ namespace client.SimpleSoapService {
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ServiceModel.ServiceContractAttribute(Namespace="http://msu/", ConfigurationName="SimpleSoapService.SimpleSoap")]
+    [System.ServiceModel.ServiceContractAttribute(Namespace="http://msu/", ConfigurationName="SOAPWS.SimpleSoap")]
     public interface SimpleSoap {
         
         // CODEGEN: Контракт генерации сообщений с именем упаковщика (sum_1) сообщения sum_1 не соответствует значению по умолчанию (Add).
         [System.ServiceModel.OperationContractAttribute(Action="http://msu/sum_1", ReplyAction="*")]
-        client.SimpleSoapService.sum_11 Add(client.SimpleSoapService.sum_1 request);
+        client.SOAPWS.sum_11 Add(client.SOAPWS.sum_1 request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://msu/sum_1", ReplyAction="*")]
-        System.Threading.Tasks.Task<client.SimpleSoapService.sum_11> AddAsync(client.SimpleSoapService.sum_1 request);
+        System.Threading.Tasks.Task<client.SOAPWS.sum_11> AddAsync(client.SOAPWS.sum_1 request);
         
         // CODEGEN: Контракт генерации сообщений с именем упаковщика (sum_2) сообщения sum_2 не соответствует значению по умолчанию (Concat).
         [System.ServiceModel.OperationContractAttribute(Action="http://msu/sum_2", ReplyAction="*")]
-        client.SimpleSoapService.sum_21 Concat(client.SimpleSoapService.sum_2 request);
+        client.SOAPWS.sum_21 Concat(client.SOAPWS.sum_2 request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://msu/sum_2", ReplyAction="*")]
-        System.Threading.Tasks.Task<client.SimpleSoapService.sum_21> ConcatAsync(client.SimpleSoapService.sum_2 request);
+        System.Threading.Tasks.Task<client.SOAPWS.sum_21> ConcatAsync(client.SOAPWS.sum_2 request);
         
         // CODEGEN: Контракт генерации сообщений с именем упаковщика (sum_3) сообщения sum_3 не соответствует значению по умолчанию (Sum).
         [System.ServiceModel.OperationContractAttribute(Action="http://msu/sum_3", ReplyAction="*")]
-        client.SimpleSoapService.sum_31 Sum(client.SimpleSoapService.sum_3 request);
+        client.SOAPWS.sum_31 Sum(client.SOAPWS.sum_3 request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://msu/sum_3", ReplyAction="*")]
-        System.Threading.Tasks.Task<client.SimpleSoapService.sum_31> SumAsync(client.SimpleSoapService.sum_3 request);
+        System.Threading.Tasks.Task<client.SOAPWS.sum_31> SumAsync(client.SOAPWS.sum_3 request);
+        
+        // CODEGEN: Контракт генерации сообщений с именем упаковщика (sum_4) сообщения sum_4 не соответствует значению по умолчанию (Adds).
+        [System.ServiceModel.OperationContractAttribute(Action="http://msu/sum_4", ReplyAction="*")]
+        client.SOAPWS.sum_41 Adds(client.SOAPWS.sum_4 request);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://msu/sum_4", ReplyAction="*")]
+        System.Threading.Tasks.Task<client.SOAPWS.sum_41> AddsAsync(client.SOAPWS.sum_4 request);
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
@@ -197,15 +204,15 @@ namespace client.SimpleSoapService {
     public partial class sum_3 {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://msu/", Order=0)]
-        public client.SimpleSoapService.MSU msu1;
+        public client.SOAPWS.MSU msu1;
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://msu/", Order=1)]
-        public client.SimpleSoapService.MSU msu2;
+        public client.SOAPWS.MSU msu2;
         
         public sum_3() {
         }
         
-        public sum_3(client.SimpleSoapService.MSU msu1, client.SimpleSoapService.MSU msu2) {
+        public sum_3(client.SOAPWS.MSU msu1, client.SOAPWS.MSU msu2) {
             this.msu1 = msu1;
             this.msu2 = msu2;
         }
@@ -218,23 +225,61 @@ namespace client.SimpleSoapService {
     public partial class sum_31 {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://msu/", Order=0)]
-        public client.SimpleSoapService.MSU sum_3Result;
+        public client.SOAPWS.MSU sum_3Result;
         
         public sum_31() {
         }
         
-        public sum_31(client.SimpleSoapService.MSU sum_3Result) {
+        public sum_31(client.SOAPWS.MSU sum_3Result) {
             this.sum_3Result = sum_3Result;
         }
     }
     
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public interface SimpleSoapChannel : client.SimpleSoapService.SimpleSoap, System.ServiceModel.IClientChannel {
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="sum_4", WrapperNamespace="http://msu/", IsWrapped=true)]
+    public partial class sum_4 {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://msu/", Order=0)]
+        public int x;
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://msu/", Order=1)]
+        public int y;
+        
+        public sum_4() {
+        }
+        
+        public sum_4(int x, int y) {
+            this.x = x;
+            this.y = y;
+        }
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public partial class SimpleSoapClient : System.ServiceModel.ClientBase<client.SimpleSoapService.SimpleSoap>, client.SimpleSoapService.SimpleSoap {
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="sum_4Response", WrapperNamespace="http://msu/", IsWrapped=true)]
+    public partial class sum_41 {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://msu/", Order=0)]
+        public int sum_4Result;
+        
+        public sum_41() {
+        }
+        
+        public sum_41(int sum_4Result) {
+            this.sum_4Result = sum_4Result;
+        }
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public interface SimpleSoapChannel : client.SOAPWS.SimpleSoap, System.ServiceModel.IClientChannel {
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public partial class SimpleSoapClient : System.ServiceModel.ClientBase<client.SOAPWS.SimpleSoap>, client.SOAPWS.SimpleSoap {
         
         public SimpleSoapClient() {
         }
@@ -256,78 +301,103 @@ namespace client.SimpleSoapService {
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        client.SimpleSoapService.sum_11 client.SimpleSoapService.SimpleSoap.Add(client.SimpleSoapService.sum_1 request) {
+        client.SOAPWS.sum_11 client.SOAPWS.SimpleSoap.Add(client.SOAPWS.sum_1 request) {
             return base.Channel.Add(request);
         }
         
         public int Add(int x, int y) {
-            client.SimpleSoapService.sum_1 inValue = new client.SimpleSoapService.sum_1();
+            client.SOAPWS.sum_1 inValue = new client.SOAPWS.sum_1();
             inValue.x = x;
             inValue.y = y;
-            client.SimpleSoapService.sum_11 retVal = ((client.SimpleSoapService.SimpleSoap)(this)).Add(inValue);
+            client.SOAPWS.sum_11 retVal = ((client.SOAPWS.SimpleSoap)(this)).Add(inValue);
             return retVal.sum_1Result;
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<client.SimpleSoapService.sum_11> client.SimpleSoapService.SimpleSoap.AddAsync(client.SimpleSoapService.sum_1 request) {
+        System.Threading.Tasks.Task<client.SOAPWS.sum_11> client.SOAPWS.SimpleSoap.AddAsync(client.SOAPWS.sum_1 request) {
             return base.Channel.AddAsync(request);
         }
         
-        public System.Threading.Tasks.Task<client.SimpleSoapService.sum_11> AddAsync(int x, int y) {
-            client.SimpleSoapService.sum_1 inValue = new client.SimpleSoapService.sum_1();
+        public System.Threading.Tasks.Task<client.SOAPWS.sum_11> AddAsync(int x, int y) {
+            client.SOAPWS.sum_1 inValue = new client.SOAPWS.sum_1();
             inValue.x = x;
             inValue.y = y;
-            return ((client.SimpleSoapService.SimpleSoap)(this)).AddAsync(inValue);
+            return ((client.SOAPWS.SimpleSoap)(this)).AddAsync(inValue);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        client.SimpleSoapService.sum_21 client.SimpleSoapService.SimpleSoap.Concat(client.SimpleSoapService.sum_2 request) {
+        client.SOAPWS.sum_21 client.SOAPWS.SimpleSoap.Concat(client.SOAPWS.sum_2 request) {
             return base.Channel.Concat(request);
         }
         
         public string Concat(string s, double d) {
-            client.SimpleSoapService.sum_2 inValue = new client.SimpleSoapService.sum_2();
+            client.SOAPWS.sum_2 inValue = new client.SOAPWS.sum_2();
             inValue.s = s;
             inValue.d = d;
-            client.SimpleSoapService.sum_21 retVal = ((client.SimpleSoapService.SimpleSoap)(this)).Concat(inValue);
+            client.SOAPWS.sum_21 retVal = ((client.SOAPWS.SimpleSoap)(this)).Concat(inValue);
             return retVal.sum_2Result;
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<client.SimpleSoapService.sum_21> client.SimpleSoapService.SimpleSoap.ConcatAsync(client.SimpleSoapService.sum_2 request) {
+        System.Threading.Tasks.Task<client.SOAPWS.sum_21> client.SOAPWS.SimpleSoap.ConcatAsync(client.SOAPWS.sum_2 request) {
             return base.Channel.ConcatAsync(request);
         }
         
-        public System.Threading.Tasks.Task<client.SimpleSoapService.sum_21> ConcatAsync(string s, double d) {
-            client.SimpleSoapService.sum_2 inValue = new client.SimpleSoapService.sum_2();
+        public System.Threading.Tasks.Task<client.SOAPWS.sum_21> ConcatAsync(string s, double d) {
+            client.SOAPWS.sum_2 inValue = new client.SOAPWS.sum_2();
             inValue.s = s;
             inValue.d = d;
-            return ((client.SimpleSoapService.SimpleSoap)(this)).ConcatAsync(inValue);
+            return ((client.SOAPWS.SimpleSoap)(this)).ConcatAsync(inValue);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        client.SimpleSoapService.sum_31 client.SimpleSoapService.SimpleSoap.Sum(client.SimpleSoapService.sum_3 request) {
+        client.SOAPWS.sum_31 client.SOAPWS.SimpleSoap.Sum(client.SOAPWS.sum_3 request) {
             return base.Channel.Sum(request);
         }
         
-        public client.SimpleSoapService.MSU Sum(client.SimpleSoapService.MSU msu1, client.SimpleSoapService.MSU msu2) {
-            client.SimpleSoapService.sum_3 inValue = new client.SimpleSoapService.sum_3();
+        public client.SOAPWS.MSU Sum(client.SOAPWS.MSU msu1, client.SOAPWS.MSU msu2) {
+            client.SOAPWS.sum_3 inValue = new client.SOAPWS.sum_3();
             inValue.msu1 = msu1;
             inValue.msu2 = msu2;
-            client.SimpleSoapService.sum_31 retVal = ((client.SimpleSoapService.SimpleSoap)(this)).Sum(inValue);
+            client.SOAPWS.sum_31 retVal = ((client.SOAPWS.SimpleSoap)(this)).Sum(inValue);
             return retVal.sum_3Result;
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<client.SimpleSoapService.sum_31> client.SimpleSoapService.SimpleSoap.SumAsync(client.SimpleSoapService.sum_3 request) {
+        System.Threading.Tasks.Task<client.SOAPWS.sum_31> client.SOAPWS.SimpleSoap.SumAsync(client.SOAPWS.sum_3 request) {
             return base.Channel.SumAsync(request);
         }
         
-        public System.Threading.Tasks.Task<client.SimpleSoapService.sum_31> SumAsync(client.SimpleSoapService.MSU msu1, client.SimpleSoapService.MSU msu2) {
-            client.SimpleSoapService.sum_3 inValue = new client.SimpleSoapService.sum_3();
+        public System.Threading.Tasks.Task<client.SOAPWS.sum_31> SumAsync(client.SOAPWS.MSU msu1, client.SOAPWS.MSU msu2) {
+            client.SOAPWS.sum_3 inValue = new client.SOAPWS.sum_3();
             inValue.msu1 = msu1;
             inValue.msu2 = msu2;
-            return ((client.SimpleSoapService.SimpleSoap)(this)).SumAsync(inValue);
+            return ((client.SOAPWS.SimpleSoap)(this)).SumAsync(inValue);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        client.SOAPWS.sum_41 client.SOAPWS.SimpleSoap.Adds(client.SOAPWS.sum_4 request) {
+            return base.Channel.Adds(request);
+        }
+        
+        public int Adds(int x, int y) {
+            client.SOAPWS.sum_4 inValue = new client.SOAPWS.sum_4();
+            inValue.x = x;
+            inValue.y = y;
+            client.SOAPWS.sum_41 retVal = ((client.SOAPWS.SimpleSoap)(this)).Adds(inValue);
+            return retVal.sum_4Result;
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.Threading.Tasks.Task<client.SOAPWS.sum_41> client.SOAPWS.SimpleSoap.AddsAsync(client.SOAPWS.sum_4 request) {
+            return base.Channel.AddsAsync(request);
+        }
+        
+        public System.Threading.Tasks.Task<client.SOAPWS.sum_41> AddsAsync(int x, int y) {
+            client.SOAPWS.sum_4 inValue = new client.SOAPWS.sum_4();
+            inValue.x = x;
+            inValue.y = y;
+            return ((client.SOAPWS.SimpleSoap)(this)).AddsAsync(inValue);
         }
     }
 }

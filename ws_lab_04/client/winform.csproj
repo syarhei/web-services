@@ -49,7 +49,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Service References\SimpleSoapService\Reference.cs">
+    <Compile Include="Service References\SOAPWS\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
@@ -84,19 +84,22 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <None Include="Service References\SimpleSoapService\client.SimpleSoapService.MSU.datasource">
+    <None Include="Service References\SOAPWS\client.SOAPWS.MSU.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\SimpleSoapService\client.SimpleSoapService.sum_11.datasource">
+    <None Include="Service References\SOAPWS\client.SOAPWS.sum_11.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\SimpleSoapService\client.SimpleSoapService.sum_21.datasource">
+    <None Include="Service References\SOAPWS\client.SOAPWS.sum_21.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\SimpleSoapService\client.SimpleSoapService.sum_31.datasource">
+    <None Include="Service References\SOAPWS\client.SOAPWS.sum_31.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\SimpleSoapService\Simple.wsdl" />
+    <None Include="Service References\SOAPWS\client.SOAPWS.sum_41.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\SOAPWS\Simple.wsdl" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -105,19 +108,22 @@
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <ItemGroup>
-    <WCFMetadataStorage Include="Service References\SimpleSoapService\" />
+    <WCFMetadataStorage Include="Service References\SOAPWS\" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Service References\SimpleSoapService\Simple.disco" />
+    <ProjectReference Include="..\testing\soap.csproj">
+      <Project>{cbe56dc7-da10-41bd-956c-b3ac865c07f5}</Project>
+      <Name>soap</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Service References\SimpleSoapService\configuration91.svcinfo" />
+    <None Include="Service References\SOAPWS\configuration91.svcinfo" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Service References\SimpleSoapService\configuration.svcinfo" />
+    <None Include="Service References\SOAPWS\configuration.svcinfo" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Service References\SimpleSoapService\Reference.svcmap">
+    <None Include="Service References\SOAPWS\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>

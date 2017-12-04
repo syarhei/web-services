@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="6f36cf54-34aa-4b09-beee-0cba17793132" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="f97cefbb-1bcc-4fa1-ac40-c83ce4ea209e" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
   <ClientOptions>
     <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
     <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
@@ -19,11 +19,10 @@
     <ServiceContractMappings />
   </ClientOptions>
   <MetadataSources>
-    <MetadataSource Address="http://localhost:53938/Code/Simple.asmx" Protocol="http" SourceId="1" />
+    <MetadataSource Address="http://localhost:53938/Code/Simple.asmx?wsdl" Protocol="http" SourceId="1" />
   </MetadataSources>
   <Metadata>
-    <MetadataFile FileName="Simple.disco" MetadataType="Disco" ID="94af1a1e-7aba-4618-b652-e0092667d5b7" SourceId="1" SourceUrl="http://localhost:53938/Code/Simple.asmx?disco" />
-    <MetadataFile FileName="Simple.wsdl" MetadataType="Wsdl" ID="e434ee3e-740b-44e2-a39b-45130b23003f" SourceId="1" SourceUrl="http://localhost:53938/Code/Simple.asmx?wsdl" />
+    <MetadataFile FileName="Simple.wsdl" MetadataType="Wsdl" ID="9376ed49-73e9-4957-9e85-ed25cc32313c" SourceId="1" SourceUrl="http://localhost:53938/Code/Simple.asmx?wsdl" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
