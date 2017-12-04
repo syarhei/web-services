@@ -35,10 +35,10 @@ namespace testing.Code {
             return new MSU(msu1.s + msu2.s, msu1.k + msu2.k, msu1.f + msu2.f);
         }
 
-        [ScriptMethod(ResponseFormat=ResponseFormat.Json)]
+        [ScriptMethod(UseHttpGet = true, ResponseFormat=ResponseFormat.Json)]
         [WebMethod(MessageName = "sum_4", Description = "Sum of 2 int. Response JSON")]
-        public string Adds(int x, int y) {
-            return JsonConvert.SerializeObject(x + y);
+        public int Adds(int x, int y) {
+            return x + y;
         }
     }
 }
