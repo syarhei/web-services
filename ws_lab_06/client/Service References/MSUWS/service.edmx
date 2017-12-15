@@ -1,0 +1,47 @@
+﻿<edmx:Edmx Version="1.0" xmlns:edmx="http://schemas.microsoft.com/ado/2007/06/edmx">
+  <edmx:DataServices m:DataServiceVersion="1.0" m:MaxDataServiceVersion="3.0" xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata">
+    <Schema Namespace="WSModel" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+      <EntityType Name="student">
+        <Key>
+          <PropertyRef Name="id" />
+        </Key>
+        <Property Name="id" Type="Edm.Int32" Nullable="false" />
+        <Property Name="name" Type="Edm.String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+        <NavigationProperty Name="notes" Relationship="WSModel.FK_notes_students" ToRole="note" FromRole="student" />
+      </EntityType>
+      <EntityType Name="note">
+        <Key>
+          <PropertyRef Name="id" />
+          <PropertyRef Name="notes" />
+          <PropertyRef Name="subject" />
+        </Key>
+        <Property Name="id" Type="Edm.Int32" Nullable="false" />
+        <Property Name="subject" Type="Edm.String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+        <Property Name="notes" Type="Edm.Int32" Nullable="false" />
+        <NavigationProperty Name="student" Relationship="WSModel.FK_notes_students" ToRole="student" FromRole="note" />
+      </EntityType>
+      <Association Name="FK_notes_students">
+        <End Type="WSModel.student" Role="student" Multiplicity="1" />
+        <End Type="WSModel.note" Role="note" Multiplicity="*" />
+        <ReferentialConstraint>
+          <Principal Role="student">
+            <PropertyRef Name="id" />
+          </Principal>
+          <Dependent Role="note">
+            <PropertyRef Name="id" />
+          </Dependent>
+        </ReferentialConstraint>
+      </Association>
+    </Schema>
+    <Schema Namespace="ws_service" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+      <EntityContainer Name="WSEntities" m:IsDefaultEntityContainer="true" p6:LazyLoadingEnabled="true" xmlns:p6="http://schemas.microsoft.com/ado/2009/02/edm/annotation">
+        <EntitySet Name="students" EntityType="WSModel.student" />
+        <EntitySet Name="notes" EntityType="WSModel.note" />
+        <AssociationSet Name="FK_notes_students" Association="WSModel.FK_notes_students">
+          <End Role="student" EntitySet="students" />
+          <End Role="note" EntitySet="notes" />
+        </AssociationSet>
+      </EntityContainer>
+    </Schema>
+  </edmx:DataServices>
+</edmx:Edmx>
