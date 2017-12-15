@@ -1,0 +1,142 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="Хранилище WSModel" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <!--Ошибки, обнаруженные при создании:
+предупреждение 6002: В таблице или представлении "WS.dbo.notes" не определен первичный ключ. Ключ был выведен, а определение таблицы или представления было создано в режиме только для чтения.-->
+        <EntityType Name="notes">
+          <Key>
+            <PropertyRef Name="id" />
+            <PropertyRef Name="subject" />
+            <PropertyRef Name="notes" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="subject" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="notes" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="students">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_notes_students">
+          <End Role="students" Type="Self.students" Multiplicity="1" />
+          <End Role="notes" Type="Self.notes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="students">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="notes">
+              <PropertyRef Name="id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище WSModelContainer">
+          <EntitySet Name="students" EntityType="Self.students" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="notes" EntityType="Self.notes" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+[notes].[id] AS [id], 
+[notes].[subject] AS [subject], 
+[notes].[notes] AS [notes]
+FROM [dbo].[notes] AS [notes]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK_notes_students" Association="Self.FK_notes_students">
+            <End Role="students" EntitySet="students" />
+            <End Role="notes" EntitySet="notes" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="WSModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="student">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="notes" Relationship="WSModel.FK_notes_students" FromRole="student" ToRole="note" />
+        </EntityType>
+        <EntityContainer Name="WSEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="students" EntityType="Self.student" />
+          <EntitySet Name="notes" EntityType="WSModel.note" />
+          <AssociationSet Name="FK_notes_students" Association="WSModel.FK_notes_students">
+            <End Role="student" EntitySet="students" />
+            <End Role="note" EntitySet="notes" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="note">
+          <Key>
+            <PropertyRef Name="id" />
+            <PropertyRef Name="subject" />
+            <PropertyRef Name="notes" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="subject" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="notes" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="student" Relationship="WSModel.FK_notes_students" FromRole="note" ToRole="student" />
+        </EntityType>
+        <Association Name="FK_notes_students">
+          <End Type="WSModel.student" Role="student" Multiplicity="1" />
+          <End Type="WSModel.note" Role="note" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="student">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="note">
+              <PropertyRef Name="id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище WSModelContainer" CdmEntityContainer="WSEntities">
+          <EntitySetMapping Name="students">
+            <EntityTypeMapping TypeName="WSModel.student">
+              <MappingFragment StoreEntitySet="students">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="notes">
+            <EntityTypeMapping TypeName="WSModel.note">
+              <MappingFragment StoreEntitySet="notes">
+                <ScalarProperty Name="notes" ColumnName="notes" />
+                <ScalarProperty Name="subject" ColumnName="subject" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="true" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
