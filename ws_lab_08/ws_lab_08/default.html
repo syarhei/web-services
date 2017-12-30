@@ -1,0 +1,35 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title></title>
+	<meta charset="utf-8" />
+    <script src="D:\Download\ws\lab_8_JSON_RPC\lab_8\Scripts"></script>
+</head>
+<body>
+    <input type="text" id="key" placeholder="key" />
+    <input type="text" id="value" placeholder="value" />
+    <input type="text" id="method" placeholder="method" />
+
+    <input type="button" onclick="" value="send" />
+    <input type="text" id="result" />
+
+    <script>
+        function send() {
+            $.ajax({
+                type: "POST",
+                url: "http://localhost:54509/api/MSU",
+                data: {
+                    id: "1",
+                    jsonrpc: "2.0",
+                    method: $("#method"),
+                    params: {
+                        key: $("#key"),
+                        value: $("#value")
+                    }
+                }
+            })
+        }
+    </script>
+</body>
+</html>
