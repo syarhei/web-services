@@ -1,0 +1,32 @@
+﻿<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title></title>
+    <script src="Scripts/jquery-3.2.1.js"></script>
+    <script>
+        function getNotes() {
+            const studentId = $("#studentId").val();
+
+            $.get('/Service/students/' + studentId + '/notes', data => {
+                let result = "";
+                $(data).find("entry").each(function () {
+                    var el = $(this);
+                    result += '<div><div><b>subject</b>: ' + el.find('title').text() + '</div><div><b>note</b>: ' + el.find('content').text() + '</div></div>';
+                });
+                result = result === "" ? "<b>Student is not found<b>" : result;
+                $('#notes').html(result);
+            });
+        }
+    </script>
+</head>
+<body>
+    <form id="form1" runat="server">
+    <div>
+        <input type="text" id="studentId" />
+        <input type="button" onclick="getNotes()" value="get" />
+    </div>
+    <div>
+        <div id="notes"></div>
+    </div>
+    </form>
+</body>
+</html>
